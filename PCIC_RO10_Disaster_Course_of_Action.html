@@ -1,0 +1,661 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCIC RO10 - Disaster Course of Action Design | PSCP Inputs</title>
+<style>
+  :root{
+    --pcic-blue:#1f4e79;
+    --pcic-accent:#2e75b6;
+    --pcic-gold:#c55a11;
+    --p1:#c00000;
+    --p2:#c55a11;
+    --p3:#bf8f00;
+    --p4:#548235;
+    --p5:#2e75b6;
+    --gray:#f2f4f7;
+    --line:#9aa7b5;
+  }
+  *{box-sizing:border-box;}
+  body{
+    font-family:"Segoe UI",Calibri,Arial,sans-serif;
+    font-size:10.5pt;
+    line-height:1.45;
+    color:#1b1b1b;
+    margin:0;
+    padding:14px;
+    background:#eef1f5;
+  }
+  .sheet{
+    width:100%;
+    max-width:none;
+    margin:0 auto;
+    background:#fff;
+    padding:28px 36px;
+    box-shadow:0 2px 10px rgba(0,0,0,.15);
+  }
+  /* ---------- COVER ---------- */
+  .cover{border-top:8px solid var(--pcic-blue);padding-top:22px;text-align:center;}
+  .agency{font-size:11pt;letter-spacing:2px;color:var(--pcic-blue);font-weight:600;text-transform:uppercase;}
+  .agency small{display:block;letter-spacing:1px;color:#555;font-weight:400;margin-top:4px;}
+  h1{font-size:21pt;color:var(--pcic-blue);margin:18px 0 6px;line-height:1.25;}
+  .subtitle{font-size:12pt;color:#444;margin-bottom:4px;}
+  .subtitle b{color:var(--pcic-gold);}
+  table.docctl{margin:20px auto 6px;border-collapse:collapse;width:92%;font-size:9.5pt;}
+  table.docctl td{border:1px solid var(--line);padding:5px 9px;}
+  table.docctl td.k{background:var(--gray);font-weight:600;width:26%;}
+  .basis{font-size:9pt;color:#555;margin-top:8px;font-style:italic;}
+  /* ---------- HEADINGS ---------- */
+  h2{
+    font-size:14pt;color:#fff;background:var(--pcic-blue);
+    padding:8px 12px;margin:34px 0 14px;border-left:6px solid var(--pcic-gold);
+    page-break-after:avoid;
+  }
+  h3{
+    font-size:11.5pt;color:var(--pcic-blue);margin:22px 0 8px;
+    border-bottom:2px solid var(--pcic-accent);padding-bottom:3px;page-break-after:avoid;
+  }
+  h4{font-size:10.5pt;color:#333;margin:14px 0 6px;page-break-after:avoid;}
+  p{margin:6px 0;}
+  ul,ol{margin:6px 0 10px;padding-left:22px;}
+  li{margin:3px 0;}
+  /* ---------- TABLES ---------- */
+  table.grid{width:100%;border-collapse:collapse;margin:8px 0 16px;font-size:9.5pt;page-break-inside:auto;}
+  table.grid th{
+    background:var(--pcic-blue);color:#fff;border:1px solid var(--line);
+    padding:6px 8px;text-align:left;vertical-align:middle;
+  }
+  table.grid td{border:1px solid var(--line);padding:6px 8px;vertical-align:top;}
+  table.grid tr:nth-child(even) td{background:#f7f9fc;}
+  table.grid tr{page-break-inside:avoid;}
+  .c{text-align:center;}
+  /* ---------- COMPONENTS ---------- */
+  .phase{
+    border:1.5px solid var(--pcic-blue);border-top:6px solid var(--pcic-accent);
+    padding:14px 16px;margin:14px 0;page-break-inside:avoid;
+  }
+  .phase .ph-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;}
+  .phase .ph-time{font-size:13pt;font-weight:700;color:var(--pcic-blue);}
+  .phase .ph-obj{font-style:italic;color:var(--pcic-gold);font-weight:600;font-size:10pt;}
+  .milestones{
+    background:#eef5fb;border:1px dashed var(--pcic-accent);
+    padding:8px 12px;margin-top:10px;font-size:9.5pt;
+  }
+  .milestones b{color:var(--pcic-blue);}
+  .badge{
+    display:inline-block;padding:2px 9px;border-radius:10px;color:#fff;
+    font-size:8.5pt;font-weight:700;letter-spacing:.5px;
+  }
+  .b-p1{background:var(--p1);} .b-p2{background:var(--p2);} .b-p3{background:var(--p3);}
+  .b-p4{background:var(--p4);} .b-p5{background:var(--p5);} .b-p6{background:#7030a0;}
+  .level0{background:#548235;color:#fff;padding:2px 8px;font-weight:700;}
+  .level1{background:#8faf50;color:#fff;padding:2px 8px;font-weight:700;}
+  .level2{background:#bf8f00;color:#fff;padding:2px 8px;font-weight:700;}
+  .level3{background:#c55a11;color:#fff;padding:2px 8px;font-weight:700;}
+  .level4{background:#c00000;color:#fff;padding:2px 8px;font-weight:700;}
+  .note{
+    background:#fff8e7;border-left:5px solid var(--pcic-gold);
+    padding:10px 14px;margin:12px 0;font-size:9.5pt;page-break-inside:avoid;
+  }
+  .note b{color:var(--pcic-gold);}
+  .callout{
+    background:#fdeaea;border-left:5px solid var(--p1);
+    padding:10px 14px;margin:12px 0;font-size:9.5pt;page-break-inside:avoid;
+  }
+  .toc{background:var(--gray);border:1px solid var(--line);padding:14px 22px;font-size:10pt;}
+  .toc ol{margin:4px 0;} .toc li{margin:4px 0;}
+  .rank{
+    display:inline-block;width:22px;height:22px;line-height:22px;text-align:center;
+    background:var(--pcic-blue);color:#fff;font-weight:700;border-radius:50%;font-size:9pt;
+  }
+  .kv{font-size:9.5pt;color:#444;}
+  footer.docfoot{
+    margin-top:34px;border-top:3px solid var(--pcic-blue);padding-top:8px;
+    font-size:8.5pt;color:#666;text-align:center;
+  }
+  /* ---------- EXECUTIVE BRIEF ---------- */
+  .exec{border:2px solid var(--pcic-gold);padding:16px 20px;margin:26px 0 10px;background:#fffdf7;}
+  .exec h2{margin-top:0;}
+  .findings{display:flex;gap:10px;margin:12px 0;}
+  .find-card{flex:1;border:1px solid var(--line);border-top:5px solid var(--pcic-accent);padding:10px;font-size:9pt;background:#fff;}
+  .find-card b{display:block;color:var(--pcic-blue);font-size:10pt;margin-bottom:4px;}
+  .timeline{display:flex;gap:0;align-items:stretch;margin:14px 0 8px;}
+  .tl-phase{flex:1;border:1px solid var(--line);padding:9px 10px;font-size:8.5pt;background:#fff;}
+  .tl-phase .tl-t{font-weight:700;font-size:10.5pt;display:block;margin-bottom:3px;}
+  .tl-arrow{align-self:center;padding:0 6px;font-size:16pt;color:var(--pcic-accent);font-weight:700;}
+  .tl1{border-top:6px solid var(--p1);} .tl1 .tl-t{color:var(--p1);}
+  .tl2{border-top:6px solid var(--p2);} .tl2 .tl-t{color:var(--p2);}
+  .tl3{border-top:6px solid var(--p4);} .tl3 .tl-t{color:var(--p4);}
+  .prio-bar{display:flex;gap:5px;margin:6px 0 14px;}
+  .prio-chip{flex:1;text-align:center;color:#fff;font-weight:700;padding:7px 2px;border-radius:4px;font-size:8pt;line-height:1.25;}
+  .disp{white-space:nowrap;font-size:9pt;}
+  .disp input{margin:0 2px 0 8px;vertical-align:middle;}
+  /* ---------- PRINT ---------- */
+  @page{size:letter landscape;margin:8mm;}
+  @media print{
+    body{background:#fff;padding:0;font-size:10pt;}
+    .sheet{box-shadow:none;width:100%;max-width:100%;padding:0;}
+    h2{page-break-before:always;background:var(--pcic-blue) !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    h2:first-of-type{page-break-before:avoid;}
+    .no-break{page-break-inside:avoid;}
+    table.grid th, .badge, .level0,.level1,.level2,.level3,.level4, .rank{
+      -webkit-print-color-adjust:exact;print-color-adjust:exact;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+<!-- ============ COVER ============ -->
+<div class="cover">
+  <div class="agency">
+    PHILIPPINE CROP INSURANCE CORPORATION
+    <small>Regional Office X (Region 10) &mdash; Northern Mindanao</small>
+  </div>
+  <h1>REGIONAL DISASTER COURSE OF ACTION DESIGN<br><span style="font-size:14pt;">Analysis, Time-Phased Recommendations &amp; Planning Inputs</span></h1>
+  <div class="subtitle">All-Hazards Continuity Operations Plan for the <b>PCIC Regional Office X</b></div>
+  <div class="subtitle" style="font-size:10.5pt;">Prepared for: Regional PSCP Planning Session (Write-Shop Inputs)</div>
+
+  <table class="docctl">
+    <tr><td class="k">Document Type</td><td>Course of Action Analysis &amp; Design &mdash; Working Paper</td></tr>
+    <tr><td class="k">Coverage</td><td>First 120 hours (24 / 72 / 120-hour recommendations)</td></tr>
+    <tr><td class="k">Geographic Scope</td><td>Region 10: Bukidnon, Camiguin, Lanao del Norte, Misamis Occidental, Misamis Oriental</td></tr>
+    <tr><td class="k">Approach</td><td>All-hazards (typhoon, earthquake, flood, landslide, volcanic eruption, storm surge, fire, cyber, pandemic, utility outage)</td></tr>
+    <tr><td class="k">Primary Basis</td><td>PCIC Public Service Continuity Plan (PSCP), 2nd Edition &mdash; Doc. No. PCIC-PSCP-001, Rev. 1, Eff. 12/16/2025</td></tr>
+    <tr><td class="k">Aligned To</td><td>PSCP Guidebook 2nd Edition (Office of Civil Defense); Republic Act No. 10121 (National Disaster Risk Reduction and Management Act); ISO 22301 principles; Civil Service Commission Alternative Work Arrangements issuances</td></tr>
+    <tr><td class="k">Date Prepared</td><td>18 October 2026</td></tr>
+    <tr><td class="k">Annex</td><td>Annex A &mdash; Participant Questionnaire answers (integrated 22 October 2026; [TO BE CONFIRMED] items flagged)</td></tr>
+    <tr><td class="k">Classification</td><td>INTERNAL USE &mdash; Draft for planning-session validation</td></tr>
+  </table>
+  <div class="basis">All recommendations herein are grounded in the PCIC PSCP 2nd Edition. Items marked "[PROPOSED]" are RO10-specific design recommendations requiring write-shop validation.</div>
+</div>
+
+<!-- ============ EXECUTIVE BRIEF ============ -->
+<div class="exec">
+  <h2 style="margin-top:0;">EXECUTIVE BRIEF &amp; DECISIONS REQUIRED &mdash; FOR THE MANAGEMENT MEETING</h2>
+  <p style="font-size:10.5pt;"><b>Purpose of this brief:</b> RO10 needs an executable disaster course of action grounded in the PCIC PSCP (2nd Edition). Analysis of the plan against RO10 conditions shows the sequence is fixed by the Recovery Time Objectives, and <b>five gaps must be decided by management now</b> &mdash; the rest of this document is the supporting design.</p>
+
+  <div class="findings">
+    <div class="find-card"><b>Finding 1 &mdash; The recovery sequence is not negotiable</b>Information Technology &amp; General Services (Tier 2) must recover within <span style="white-space:nowrap"><b>12&ndash;24 hours</b>;</span> only then can claims and underwriting (Tier 4) recover within <span style="white-space:nowrap"><b>48&ndash;72 hours</b>.</span> Plans that skip Information Technology/data restoration fail both tiers.</div>
+    <div class="find-card"><b>Finding 2 &mdash; Claims lead recovery, not underwriting</b>After a calamity, <b>Mission Essential Function 2 (indemnity claims)</b> must get first call on restored capacity &mdash; affected farmers are watching PCIC's response. Underwriting backlog follows immediately to close uninsured gaps.</div>
+    <div class="find-card"><b>Finding 3 &mdash; Five roles make or break Day 1</b>Regional Manager (command) &rarr; Communications/Marketing and Sales Division (call tree &amp; reports) &rarr; Information Technology Specialist (PCIC Automated Business System/policy data) &rarr; Medical/Claims Adjustment Division (life safety) &rarr; Logistics/Administrative and Finance Division (hot site &amp; supplies) &mdash; each with a confirmed alternate within 2 hours.</div>
+  </div>
+
+  <h4 style="margin-top:4px;">AT A GLANCE &mdash; 120-Hour Recovery Path &amp; Resource Priority Order</h4>
+  <div class="timeline">
+    <div class="tl-phase tl1"><span class="tl-t">0&ndash;24 HOURS &bull; PROTECT &amp; ASSESS</span>personnel roll call within 1 hour &bull; damage assessment within 4 hours &bull; Head Office report within 4 hours &bull; data/backups secured &bull; activation level recommended &bull; hot site pre-staged</div>
+    <div class="tl-arrow">&rarr;</div>
+    <div class="tl-phase tl2"><span class="tl-t">24&ndash;72 HOURS &bull; RESTORE &amp; STABILIZE</span>Information Technology + facilities restored (Tier 2: 12&ndash;24 hours) &bull; claims intake OPEN (Tier 4: 48&ndash;72 hours) &bull; underwriting resumed &bull; daily Situation Report &bull; field teams deployed</div>
+    <div class="tl-arrow">&rarr;</div>
+    <div class="tl-phase tl3"><span class="tl-t">72&ndash;120 HOURS &bull; RECOVER &amp; TRANSITION</span>Scale claims &amp; clear backlog &bull; disaster-data brief to Head Office &bull; post-incident reports drafted &bull; lessons learned &bull; reconstitution / deactivation plan</div>
+  </div>
+  <div class="prio-bar">
+    <div class="prio-chip" style="background:var(--p1);">Priority 1<br>PEOPLE &amp; DATA</div>
+    <div class="prio-chip" style="background:var(--p3);">Priority 2<br>COMMUNICATIONS</div>
+    <div class="prio-chip" style="background:var(--p4);">Priority 3<br>FACILITY / HOT SITE</div>
+    <div class="prio-chip" style="background:var(--p5);">Priority 4<br>LOGISTICS / TRANSPORT</div>
+    <div class="prio-chip" style="background:#7030a0;">Priority 5<br>FUNDS &amp; PARTNERS</div>
+    <div class="prio-chip" style="background:#44546a;">Priority 6<br>DISASTER DATA</div>
+  </div>
+
+  <h3 style="margin-top:6px;">DECISION / APPROVAL ITEMS FOR THIS MEETING</h3>
+  <table class="grid">
+    <thead><tr><th style="width:9%">#</th><th style="width:24%">Decision Item</th><th style="width:24%">Recommendation</th><th style="width:15%">Resource Implication</th><th style="width:11%">Owner</th><th style="width:8%">Target</th><th style="width:9%">Disposition</th></tr></thead>
+    <tr><td class="c">Decision 1</td><td><b>Designate RO10 hot site</b> (primary + alternate extension office) and pre-stage it</td><td>Approve designation now; pre-stage Information Technology kit, generator, records, supplies within the quarter</td><td>Uses existing contingency/procurement; minor setup cost</td><td>Administrative and Finance Division + Information and Communications Technology</td><td>This quarter</td><td class="disp"><input type="checkbox"> Approve<br><input type="checkbox"> Modify<br><input type="checkbox"> Defer</td></tr>
+    <tr><td class="c">Decision 2</td><td><b>Mandate daily off-site/cloud backup</b> of PCIC Automated Business System &amp; PCIC Financial Management System with monthly restore test</td><td>Approve; no additional purchase if cloud storage already available &mdash; verify</td><td>Minimal; staff time</td><td>Information Technology Specialist</td><td>This quarter</td><td class="disp"><input type="checkbox"> Approve<br><input type="checkbox"> Modify<br><input type="checkbox"> Defer</td></tr>
+    <tr><td class="c">Decision 3</td><td><b>Adopt claims-first disaster triage rule</b> (Mission Essential Function 2 priority over Mission Essential Function 1 after calamities)</td><td>Approve as standing RO10 rule; fast-track claims in areas under a local state-of-calamity declaration</td><td>None &mdash; internal sequencing</td><td>Regional Manager + Claims Adjustment Division</td><td>Now</td><td class="disp"><input type="checkbox"> Approve<br><input type="checkbox"> Modify<br><input type="checkbox"> Defer</td></tr>
+    <tr><td class="c">Decision 4</td><td><b>Confirm RO10 authority</b>: Regional Manager may declare Level 1&ndash;2 measures pending Head of Agency</td><td>Approve internally; validate with Office of Civil Defense/Head Office at the write-shop</td><td>None</td><td>Regional Manager</td><td>Next session</td><td class="disp"><input type="checkbox"> Approve<br><input type="checkbox"> Modify<br><input type="checkbox"> Defer</td></tr>
+    <tr><td class="c">Decision 5</td><td><b>Name alternates + populate contact directory</b>; conduct live call-tree test</td><td>Approve; all 6 coordinators &amp; Quick Response Team with confirmed alternates; test cascade same quarter</td><td>Staff time</td><td>Marketing and Sales Division + Human Resource focal</td><td>This quarter</td><td class="disp"><input type="checkbox"> Approve<br><input type="checkbox"> Modify<br><input type="checkbox"> Defer</td></tr>
+    <tr><td class="c">Decision 6</td><td><b>Cross-train single-point roles</b> (Information Technology Specialist, Marketing and Sales Division Chief, Administrative and Finance Division Chief)</td><td>Approve; designate &amp; orient 1 backup per critical role</td><td>Staff time; training</td><td>Regional Manager + Human Resource</td><td>This quarter</td><td class="disp"><input type="checkbox"> Approve<br><input type="checkbox"> Modify<br><input type="checkbox"> Defer</td></tr>
+    <tr><td class="c">Decision 7</td><td><b>Issue 24-hour checklist cards</b> (one per coordinator) + unified call-tree and alternative work arrangements notice template</td><td>Approve; convert Sections 3&ndash;5 into pocket cards</td><td>Printing only</td><td>Continuity Core Team/Communications</td><td>30 days</td><td class="disp"><input type="checkbox"> Approve<br><input type="checkbox"> Modify<br><input type="checkbox"> Defer</td></tr>
+    <tr><td class="c">Decision 8</td><td><b>Roll out participant questionnaire</b>; consolidate responses into the Summary Matrix for plan localization</td><td>Approve distribution to all Disaster Control Group/Quick Response Team members, division chiefs &amp; extension heads; deadline for return in 5 working days</td><td>Staff time</td><td>Secretariat</td><td>5 work days</td><td class="disp"><input type="checkbox"> Approve<br><input type="checkbox"> Modify<br><input type="checkbox"> Defer</td></tr>
+  </table>
+  <p class="kv"><b>Disposition:</b> Approve, Modify (annotate changes), or Defer (state the deferred date). Decisions 1 through 3 close the highest-risk gaps (untested hot site, unrecoverable data, claims-backlog chaos).</p>
+</div>
+
+<!-- ============ TOC ============ -->
+<div class="toc">
+  <b>CONTENTS</b>
+  <p style="margin:2px 0 6px;"><b>0. Executive Brief &amp; Decisions Required (for the Management Meeting)</b></p>
+  <ol>
+    <li>Purpose, Scope &amp; Regional Hazard Profile</li>
+    <li>RO10 Disaster Response Design &mdash; Command, Activation Levels &amp; Operating Modes</li>
+    <li>Time-Phased Course of Action: 0&ndash;24 Hours | 24&ndash;72 Hours | 72&ndash;120 Hours</li>
+    <li>Essential Resources for Recovery &mdash; Prioritization Matrix</li>
+    <li>Role Players &amp; Vital Role Prioritization</li>
+    <li>Recommendations &amp; Inputs for Tomorrow's Planning Session</li>
+  </ol>
+</div>
+
+<!-- ============ SECTION 1 ============ -->
+<h2>1. PURPOSE, SCOPE &amp; REGIONAL HAZARD PROFILE</h2>
+
+<h3>1.1 Purpose</h3>
+<p>This document translates the national PCIC Public Service Continuity Plan (PSCP) into a <b>regional-level course of action</b> for PCIC Regional Office X, so the Regional Office knows exactly <b>who acts, what is restored first, and in what sequence</b> during and after a disaster. It provides:</p>
+<ul>
+  <li>A phase-based operating design keyed to the PSCP's three scenarios (first 24 hours; 2&ndash;7 days; 8&ndash;14 days);</li>
+  <li>Specific recommendations at the <b>24-hour, 72-hour, and 120-hour</b> marks;</li>
+  <li>A ranked list of <b>essential resources to prioritize for recovery</b>;</li>
+  <li>The <b>Regional Office-level role players</b> (per PSCP Table 2) with a prioritized list of vital roles; and</li>
+  <li>Ready-to-use <b>inputs for tomorrow's planning session</b>.</li>
+</ul>
+
+<h3>1.2 Scope</h3>
+<p>Applies to all RO10 units and its extension offices, covering the two Mission Essential Functions and two Essential Supporting Activities defined in PSCP Section VIII:</p>
+<table class="grid">
+  <thead><tr><th style="width:6%">#</th><th style="width:34%">Function</th><th style="width:14%">Classification</th><th style="width:20%">Recovery Time Objective</th><th>Design Consequence</th></tr></thead>
+  <tr><td class="c">Mission Essential Function 1</td><td>Processing of Application for Insurance Coverage (underwriting: receipt, encoding, inspection, approval, premium, issuance of policy)</td><td>Tier 4</td><td><b>Within 48&ndash;72 hours</b></td><td>Resume after Information Technology/services are restored; seasonal deadlines matter</td></tr>
+  <tr><td class="c">Mission Essential Function 2</td><td>Processing of Claims for Indemnity and Other Benefits (notice of loss, verification, investigation, Claims Adjustment and Verification Report, approval, payment release)</td><td>Tier 4</td><td><b>Within 48&ndash;72 hours</b></td><td><b>Priority Mission Essential Function after a disaster</b> &mdash; affected farmers need indemnity [PROPOSED]</td></tr>
+  <tr><td class="c">Essential Supporting Activity 1</td><td>Information Technology Services (internet and local area network, servers, PCIC Automated Business System, PCIC Financial Management System, Human Resource Management System, shared drives, helpdesk)</td><td>Tier 2</td><td><b>Within 12&ndash;24 hours</b></td><td><b>Must recover FIRST</b> &mdash; Mission Essential Functions cannot run without it</td></tr>
+  <tr><td class="c">Essential Supporting Activity 2</td><td>General Services (facility management, finance/supplies/equipment, transport, records handling)</td><td>Tier 2</td><td><b>Within 12&ndash;24 hours</b></td><td>Enables everything else: power, transport, supplies, records</td></tr>
+</table>
+<div class="note"><b>Key planning insight:</b> The recovery sequence is fixed by the Recovery Time Objectives &mdash; <b>Essential Supporting Activities (12&ndash;24 hours) recover before Mission Essential Functions (48&ndash;72 hours)</b>. Any 24-hour plan that does not restore Information Technology and general services has already failed its Tier 2 objectives, and the 72-hour Mission Essential Function targets become unreachable.</div>
+
+<h3>1.3 Regional Hazard Profile &mdash; Region 10 [PROPOSED inputs for Form 2: Risk Assessment]</h3>
+<table class="grid">
+  <thead><tr><th style="width:20%">Hazard</th><th style="width:11%">PSCP Nat'l Risk Score</th><th style="width:34%">RO10 Exposure Notes</th><th>Dominant Impact Areas (People, Place, Process, Partners, Public, and Information and Communications Technology)</th></tr></thead>
+  <tr><td><b>Typhoon</b></td><td class="c"><b>20</b> (highest)</td><td>Typhoon belt; Odette-scale events cause prolonged power/internet loss for weeks&ndash;months (as hit Regional Office VII)</td><td>People, Place, Process, Partners, Public, Information and Communications Technology &mdash; all six</td></tr>
+  <tr><td><b>Earthquake</b></td><td class="c"><b>20</b> (highest)</td><td>Philippine Fault System traverses Mindanao; 2023 magnitude 7.6 Surigao event felt region-wide; sudden-onset, no warning</td><td>All six</td></tr>
+  <tr><td>Volcanic eruption</td><td class="c">16</td><td>Hibok-Hibok (Camiguin), Malindang (Misamis Occidental), Kitanglad/Kalatungan (Bukidnon); nearby Apo</td><td>People, Place, Process, Partners, Public, Information and Communications Technology</td></tr>
+  <tr><td>Labor shortage</td><td class="c">16</td><td>Staff displaced/stranded; road closures limit reporting; harvest-season field workload</td><td>People, Process, Partner, Public</td></tr>
+  <tr><td>Pandemic / public health</td><td class="c">15</td><td>Workforce attrition; distancing limits office capacity</td><td>People, Process, Partner, Public</td></tr>
+  <tr><td>Power &amp; internet interruption</td><td class="c">12</td><td>Longest-duration threat in RO10 post-typhoon; directly kills PCIC Automated Business System/PCIC Financial Management System availability</td><td>Process, Partner, Public, Information and Communications Technology</td></tr>
+  <tr><td>Storm surge / tsunami</td><td class="c">12 / 15</td><td>Coastal: Camiguin, Misamis coastlines, Iligan Bay</td><td>People, Place, Process, Public, Information and Communications Technology</td></tr>
+  <tr><td>Flood / landslide</td><td class="c">5 / 5</td><td>Locally HIGH: Cagayan de Oro &amp; Iligan river systems; Pantaron Range / Aglayan&ndash;Talakag roads, highland Bukidnon</td><td>People, Place, Process, Public</td></tr>
+  <tr><td>Fire / cyberattack</td><td class="c">5 / 5</td><td>Office fire; ransomware/data loss of policy &amp; claims records</td><td>Cyber: Place (data), Process, Partner, Public, Information and Communications Technology</td></tr>
+</table>
+
+<!-- ============ SECTION 2 ============ -->
+<h2>2. RO10 DISASTER RESPONSE DESIGN &mdash; COMMAND, ACTIVATION &amp; OPERATING MODES</h2>
+
+<h3>2.1 Command &amp; Control Flow</h3>
+<table class="grid">
+  <thead><tr><th style="width:30%">Level</th><th style="width:35%">Function</th><th>RO10 Design Note [PROPOSED]</th></tr></thead>
+  <tr><td><b>Head of Agency</b> (PCIC President)</td><td><b>Sole authority</b> to activate/deactivate the PSCP (PSCP Section IX)</td><td>RO10 <b>recommends</b>; does not declare. Succession: President &rarr; Vice President, Risk Management Office (Continuity Manager) &rarr; Vice President, Corporate Business Affairs Group (Continuity Coordinator)</td></tr>
+  <tr><td><b>Head Office Disaster Control Group</b> &mdash; chaired by Vice President, Support Services Group</td><td>Initial national response; recommends activation to Head of Agency; coordinates with Continuity Core Team</td><td>RO10 reports initial damage assessment here &mdash; within <b>4 hours</b> of incident [PROPOSED]</td></tr>
+  <tr><td><b>RO10 Disaster Control Group / Quick Response Team</b> &mdash; chaired by <b>Regional Manager (Quick Response Team Head)</b></td><td>Regional Office-level rapid assessment, life safety, call tree, local coordination</td><td>Per PSCP Table 2, the Regional Manager is Quick Response Team Head; RO10 designates Regional Manager as <b>Regional Office Incident Commander</b> for the response phase [PROPOSED]</td></tr>
+  <tr><td><b>Continuity Core Team</b> &mdash; Head Office-based; Mindanao Regional Office representative = Regional Manager, Regional Office X</td><td>Plan maintenance, joins Disaster Control Group as Continuity Coordinators upon activation</td><td>Regional Manager RO10 is the <b>Mindanao continuity voice</b> at national level; Administrative and Finance Division Div. Chief is alternate [per Table 1]</td></tr>
+  <tr><td><b>External</b></td><td>Local Disaster Risk Reduction and Management Council and Office, Office of Civil Defense Region X, Philippine Atmospheric, Geophysical and Astronomical Services Administration (PAGASA) and the Philippine Institute of Volcanology and Seismology (PHIVOLCS), Philippine Red Cross, National Irrigation Administration, Department of Agriculture, landlord, telcos, electric cooperative</td><td>Quick Response Team Head coordinates externally (PSCP Section VI, Quick Response Team Head item e)</td></tr>
+</table>
+
+<h3>2.2 Activation Matrix &mdash; Localized Triggers for RO10</h3>
+<table class="grid">
+  <thead><tr><th style="width:14%">Level</th><th style="width:22%">Meaning</th><th style="width:36%">RO10 Trigger Conditions</th><th style="width:28%">Required Regional Office Action</th></tr></thead>
+  <tr><td><span class="level0">LEVEL 0</span></td><td>Normal operations</td><td>No disruption; all systems functional</td><td>Continue ops; routine hazard monitoring (PAGASA bulletins)</td></tr>
+  <tr><td><span class="level1">LEVEL 1</span></td><td>Heightened monitoring</td><td>Moderate hazard alert (signal-based); Information and Communications Technology/utility issues &gt;12 hours</td><td>Activate Disaster Control Group monitoring; pre-position records; verify backups; verify call tree; ready hot site inventory</td></tr>
+  <tr><td><span class="level2">LEVEL 2</span></td><td>Partial disruption</td><td>Mission Essential Function at 60&ndash;80% capacity; Information and Communications Technology outage 12&ndash;24 hours; work suspension in limited provinces (for example, only Camiguin or Bukidnon stranded)</td><td>Convene Regional Office Disaster Control Group; corrective actions; prepare for possible PSCP activation; partial alternative work arrangements and skeleton workforce</td></tr>
+  <tr><td><span class="level3">LEVEL 3</span></td><td><b>Major disruption &mdash; PSCP activation</b></td><td>Mission Essential Function below 50% capacity; Information and Communications Technology outage &gt;24 hours; facility damage &gt;25%; personnel availability below 50%</td><td>Head Office Disaster Control Group Chair recommends activation to Head of Agency; mobilize Continuity Core Team; implement PSCP procedures; skeleton workforce</td></tr>
+  <tr><td><span class="level4">LEVEL 4</span></td><td>Full continuity operations</td><td>Facility unsafe/unusable; utilities down &gt;48 hours; widespread regional impact (region-wide typhoon/earthquake)</td><td>Shift operations to <b>Hot Site</b> (nearest functional Extension Office); full continuity protocols; coordinate with national/local authorities</td></tr>
+</table>
+<div class="note"><b>Assessment rule (PSCP Section IX):</b> Levels are guidance only &mdash; activation depends on the Disaster Control Group's actual rapid assessment. [PROPOSED] RO10 should also allow the Regional Manager to declare <b>Level 1&ndash;2 internal measures</b> immediately (call tree, skeleton staffing, backup verification) while awaiting Head of Agency decision for Levels 3&ndash;4 &mdash; clarify this delegation with the Office of Civil Defense resource person.</div>
+
+<h3>2.3 Operating Modes</h3>
+<table class="grid">
+  <thead><tr><th style="width:24%">Mode</th><th style="width:20%">When</th><th>What Changes</th></tr></thead>
+  <tr><td><b>Normal</b></td><td>Level 0</td><td>Full workforce; primary office; all divisions running Mission Essential Functions</td></tr>
+  <tr><td><b>Heightened</b></td><td>Level 1</td><td>Pre-disaster: backups mirrored off-site, vital physical records elevated, vehicles/fuel checked, Quick Response Team on standby</td></tr>
+  <tr><td><b>Skeleton / Alternative Work Arrangements</b></td><td>Levels 2&ndash;3</td><td>Skeletal workforce for claims/underwriting frontlines; Work From Home for encode/report functions; staggered hours; transport support for staff without travel means</td></tr>
+  <tr><td><b>Hot Site</b></td><td>Level 4</td><td>Move to <b>nearest functional PCIC Extension Office</b> (per PSCP location criteria for Regional Offices); workspace, Information Technology, generator, records, supplies deployed</td></tr>
+  <tr><td><b>Return / Reconstitution</b></td><td>Deactivation</td><td>Post-incident assessment &rarr; Head of Agency declares deactivation &rarr; transfer data/equipment back to primary office &rarr; Post-Incident Report</td></tr>
+</table>
+
+<!-- ============ SECTION 3 ============ -->
+<h2>3. TIME-PHASED COURSE OF ACTION</h2>
+<p>Phases align with PSCP's three planning scenarios. Each phase states its objective, sequenced actions, the responsible role, and the required outputs/milestones.</p>
+
+<div class="phase">
+  <div class="ph-head">
+    <span class="ph-time">PHASE 1 &mdash; FIRST 24 HOURS (0&ndash;24 hours): PROTECT &amp; ASSESS</span>
+    <span class="ph-obj">Objective: Save lives, account for all personnel, assess, secure data, recommend activation</span>
+  </div>
+  <table class="grid">
+    <thead><tr><th style="width:10%">Hours After Incident</th><th style="width:42%">Action</th><th style="width:24%">Lead Role</th><th style="width:24%">Output / Standard</th></tr></thead>
+    <tr><td class="c">0&ndash;1</td><td>Activate Quick Response Team; conduct roll call of <b>all RO10 personnel</b> via call tree (office, mobile, group chat); confirm dependents' safety status</td><td>Quick Response Team Head (Regional Manager); Communications Coordinator (Marketing and Sales Division Chief)</td><td>100% personnel accountability report</td></tr>
+    <tr><td class="c">0&ndash;2</td><td><b>First-five vital roles filled</b> (Section 5.3) with alternates confirmed on duty</td><td>Regional Manager</td><td>Response roster activated</td></tr>
+    <tr><td class="c">0&ndash;4</td><td><b>Rapid damage assessment</b> across four fronts: (a) personnel casualties/welfare &mdash; Medical; (b) facility structural safety &mdash; Facilities; (c) Information Technology equipment, servers, records condition &mdash; Information and Communications Technology; (d) equipment/furniture/vehicles &mdash; Logistics</td><td>All Disaster Control Group coordinators, assisted by Quick Response Team members (Administrative and Finance Division, Claims Adjustment Division, Marketing and Sales Division Chiefs)</td><td>Consolidated Initial Damage Assessment</td></tr>
+    <tr><td class="c">0&ndash;4</td><td><b>Secure vital records &amp; data:</b> verify last backup, copy backups to an off-site external hard disk drive or cloud mirror; begin priority retrieval of physical vital records (policy registers, claims files, cash books)</td><td>Information and Communications Technology and Records Safety Coordinator (Information Technology Specialist)</td><td>Backup verified/secured &mdash; before any evacuation of hardware</td></tr>
+    <tr><td class="c">&le;4</td><td><b>Report #1 to Head Office:</b> initial assessment of damages to personnel, records, equipment to Head Office Disaster Control Group Chair (Vice President, Support Services Group) and Continuity Manager</td><td>Communications Coordinator (Marketing and Sales Division Chief) as Disaster Control Group secretary/spokesperson</td><td>Initial report transmitted per PSCP Information Registry</td></tr>
+    <tr><td class="c">&le;6</td><td><b>Recommended activation level</b> (Level 1&ndash;4) based on PSCP Activation Matrix; formal recommendation flows to Head of Agency via Head Office Disaster Control Group</td><td>Regional Office Disaster Control Group / Regional Manager &rarr; Head Office Disaster Control Group Chair</td><td>Activation recommendation submitted</td></tr>
+    <tr><td class="c">&le;8</td><td>Coordinate with <b>Local Disaster Risk Reduction and Management Council and Office, landlord, telco, electric cooperative</b>; request road/access clearance info; check status of extension offices (potential hot sites)</td><td>Quick Response Team Head; Logistics Coordinator (Administrative and Finance Division Chief)</td><td>External coordination log</td></tr>
+    <tr><td class="c">&le;12</td><td>Issue <b>internal advisory</b> (work status, reporting instructions, safety reminders) and <b>first public/client advisory</b> via official page/chat group; stand up spokesperson discipline (all external talk = designated spokesperson)</td><td>Communications Coordinator; Information and Communications Technology Coordinator (web/social posting)</td><td>Advisory #1 released; single-spokesperson rule in effect</td></tr>
+    <tr><td class="c">&le;24</td><td>Determine <b>operating mode</b> for next 24 hours: normal / skeleton workforce or alternative work arrangements / hot site needed; identify which provinces/divisions can work; deploy Work From Home and staggered hours</td><td>Regional Manager with division chiefs</td><td>Work-arrangement memo issued</td></tr>
+    <tr><td class="c">&le;24</td><td>If facility unsafe: <b>pre-stage hot site</b> at nearest functional Extension Office (Information Technology kit, generator, records, supplies) without waiting for full migration</td><td>Logistics Coordinator (Administrative and Finance Division Chief); Information and Communications Technology Coordinator</td><td>Hot site pre-staged &amp; power confirmed</td></tr>
+  </table>
+  <div class="milestones"><b>24-HOUR RECOMMENDATIONS (verify before 24 hours have elapsed):</b>
+    <ol style="margin:4px 0;">
+      <li>100% personnel accounted for; casualties (if any) recorded and families notified.</li>
+      <li>Initial Damage Assessment consolidated and Head Office informed &mdash; no later than 4 hours after the incident, updated at 24 hours.</li>
+      <li>Activation level formally recommended; PSCP activation requested if any Level 3 trigger is met.</li>
+      <li><b>Information Technology/data secured (Tier 2 Recovery Time Objective clock already running &mdash; 12&ndash;24 hours):</b> backups verified off-site; PCIC Automated Business System/PCIC Financial Management System server status known.</li>
+      <li>Skeleton workforce and alternative work arrangements plan in force; no unit left without a reporting instruction.</li>
+      <li>Hot site candidate pre-designated and pre-staged; generators/fuel confirmed.</li>
+      <li>Call tree executed end-to-end (all divisions + extension offices); external partners contacted.</li>
+    </ol>
+  </div>
+</div>
+
+<div class="phase">
+  <div class="ph-head">
+    <span class="ph-time">PHASE 2 &mdash; 24 TO 72 HOURS (24 to 72 hours after the incident): RESTORE &amp; STABILIZE</span>
+    <span class="ph-obj">Objective: Hit Tier 2 Recovery Time Objectives, then stand up Mission Essential Functions &mdash; claims first &mdash; within Tier 4 Recovery Time Objective</span>
+  </div>
+  <table class="grid">
+    <thead><tr><th style="width:10%">Hours After Incident</th><th style="width:42%">Action</th><th style="width:24%">Lead Role</th><th style="width:24%">Output / Standard</th></tr></thead>
+    <tr><td class="c">24&ndash;48</td><td><b>Restore Essential Supporting Activity-1 (Information Technology):</b> internet and local area network, server, power to Information Technology room; bring <b>PCIC Automated Business System (policy &amp; claims database), PCIC Financial Management System, Human Resource Management System</b> back online; restore shared drives; user helpdesk for skeleton staff</td><td>Information and Communications Technology and Records Safety Coordinator; supported by Head Office Information Technology</td><td><b>Essential Supporting Activity Recovery Time Objective met: Information Technology services within 12&ndash;24 hours of restoration start</b></td></tr>
+    <tr><td class="c">24&ndash;48</td><td><b>Restore Essential Supporting Activity-2 (General Services):</b> facility made safe or hot site activated; power (generator if grid down); transport/fuel for adjusters; supplies, water, food for skeleton staff; records handling resumed</td><td>Facilities Safety Officer; Logistics Coordinator (Administrative and Finance Division Chief)</td><td>Safe workspace + transport + supplies for Mission Essential Function teams</td></tr>
+    <tr><td class="c">48&ndash;72</td><td><b>Stand up Mission Essential Function 2 &mdash; CLAIMS first:</b> receipt &amp; encoding of notices of loss from affected farmers, coverage verification, assignment of claims investigation, scheduling of field adjustments</td><td>Claims Adjustment Division (Claims Adjustment Division Chief) + Administrative and Finance Division personnel</td><td><b>Mission Essential Function 2 Recovery Time Objective: 48&ndash;72 hours</b> &mdash; intake channels OPEN to affected clients</td></tr>
+    <tr><td class="c">48&ndash;72</td><td><b>Stand up Mission Essential Function 1 &mdash; Underwriting:</b> resume encoding/review, inspection scheduling, premium processing, issuance of certificates &mdash; seasonal/planting-cycle applications must not lapse</td><td>Marketing &amp; Sales/Underwriting divisions + Administrative and Finance Division; Head Office oversight</td><td><b>Mission Essential Function 1 Recovery Time Objective: 48&ndash;72 hours</b></td></tr>
+    <tr><td class="c">24&ndash;72</td><td>Daily <b>situational report</b> to Head Office (personnel, facility, systems, Mission Essential Function status %, external environment) and to RO10 management; public information via radio programs/social media per PSCP strategies</td><td>Communications Coordinator (Marketing and Sales Division Chief)</td><td>Situation Report daily at fixed hour [PROPOSED: 4:00 PM]</td></tr>
+    <tr><td class="c">24&ndash;72</td><td>Personnel welfare loop: food/water/medical support; transport assistance for staff without travel means; hazard pay/meals logistics (pre-arranged/cleared as needed)</td><td>Medical Coordinator (Claims Adjustment Division Chief); Logistics Coordinator</td><td>Welfare log; zero stranded personnel unaided</td></tr>
+    <tr><td class="c">48&ndash;72</td><td>Pre-position <b>claims investigation teams</b> by province; coordinate access routes and security with Local Disaster Risk Reduction and Management Council/Philippine Red Cross; group adjustments by municipality to save travel</td><td>Quick Response Team Head; Claims Adjustment Division Chief</td><td>Provincial deployment plan</td></tr>
+    <tr><td class="c">48&ndash;72</td><td>Confirm <b>indemnity disbursement channels</b> (automated teller machine/cash card/scheduled on-site distribution) with Finance/Head Office &mdash; payment capacity is part of claims continuity</td><td>Administrative and Finance Division personnel + Finance (Head Office)</td><td>Disbursement modality confirmed</td></tr>
+    <tr><td class="c">&le;72</td><td>Assess Mission Essential Function capacity honestly against activation matrix (60&ndash;80% vs &lt;50%); update Head Office whether PSCP activation/hot site is still needed</td><td>Regional Office Disaster Control Group</td><td>Level status updated; recommendation to continue/escalate</td></tr>
+  </table>
+  <div class="milestones"><b>72-HOUR RECOMMENDATIONS (verify before 72 hours have elapsed):</b>
+    <ol style="margin:4px 0;">
+      <li><b>Essential Supporting Activity 1 &amp; 2 (Tier 2) fully restored</b> &mdash; Information Technology and general services back within the 12&ndash;24 hours objective; any failure escalated to Head Office with an estimated recovery time.</li>
+      <li><b>Both Mission Essential Functions operating at agreed capacity</b> by 72 hours &mdash; claims intake OPEN for affected farmers (Mission Essential Function 2), underwriting processing (Mission Essential Function 1), per Tier 4 Recovery Time Objective.</li>
+      <li>Hot site (if used) fully operational: workspace, Information Technology, power, records, water, storage &mdash; per PSCP hot-site requirements.</li>
+      <li>Daily Situation Report rhythm established; single-spokesperson discipline maintained; no conflicting public information.</li>
+      <li>Claims adjustment teams deployed by province with access coordination done (access, roads, and security coordinated with the Local Disaster Risk Reduction and Management Council).</li>
+      <li>Disbursement channel for indemnity payments confirmed with Finance/Head Office.</li>
+      <li>Welfare, transport, and supply support continuous for skeleton workforce.</li>
+    </ol>
+  </div>
+</div>
+
+<div class="phase">
+  <div class="ph-head">
+    <span class="ph-time">PHASE 3 &mdash; 72 TO 120 HOURS (72 to 120 hours after the incident): RECOVER &amp; TRANSITION</span>
+    <span class="ph-obj">Objective: Scale recovery, clear disaster-driven backlog, begin return-to-normal planning, capture lessons</span>
+  </div>
+  <table class="grid">
+    <thead><tr><th style="width:10%">Hours After Incident</th><th style="width:42%">Action</th><th style="width:24%">Lead Role</th><th style="width:24%">Output / Standard</th></tr></thead>
+    <tr><td class="c">72&ndash;120</td><td><b>Scale Mission Essential Function 2 for disaster volume:</b> special claims adjustment teams/extended hours for widespread loss; enforce daily targets for investigation, Claims Adjustment and Verification Report, approval, payment release; prioritize high-volume/catastrophe-style losses</td><td>Claims Adjustment Division Chief; all adjusters; Administrative and Finance Division processing support</td><td>Claims pipeline moving end-to-end: Notice of Loss &rarr; investigation &rarr; Claims Adjustment and Verification Report &rarr; approval &rarr; payment</td></tr>
+    <tr><td class="c">72&ndash;120</td><td>Prioritize claims of <b>totally/seriously affected farmers</b> (calamity-hit areas) for faster indemnity [PROPOSED triage rule for validation]</td><td>Claims Adjustment Division Chief + Regional Manager</td><td>Tiered claims queue documented</td></tr>
+    <tr><td class="c">72&ndash;120</td><td><b>Restore Mission Essential Function 1 backlog:</b> pending inspections, premium accounting, policy issuance for the current season; avoid uninsured-exposure gap for the next cropping cycle</td><td>Underwriting/Marketing and Sales Division divisions + Administrative and Finance Division</td><td>Application backlog report with clearing target</td></tr>
+    <tr><td class="c">72&ndash;120</td><td><b>Disaster data aggregation:</b> compile extent of impact on insured farmers/fisherfolk per province &mdash; insurable loss estimates, area affected, claims expected &mdash; for Head Office and national reporting</td><td>Communications Coordinator + Planning/Planning and Management Information Office focal + Claims Adjustment Division/Marketing and Sales Division</td><td>RO10 disaster data brief submitted to Head Office</td></tr>
+    <tr><td class="c">72&ndash;120</td><td><b>Start post-incident reports (parallel, not deferred):</b> Information and Communications Technology post-incident report (records/Information Technology equipment); Facilities post-incident report (equipment/furniture/facilities); Quick Response Team/units report on personnel</td><td>Information and Communications Technology Coordinator; Facilities Safety Officer; Quick Response Team members</td><td>Draft post-incident reports (feeds Head Office's consolidated report)</td></tr>
+    <tr><td class="c">72&ndash;120</td><td>If hot site used: <b>plan reconstitution</b> &mdash; facility repair/structural clearance, sequencing for transfer of equipment/records back to primary office</td><td>Logistics + Facilities + Information and Communications Technology</td><td>Reconstitution checklist with dates</td></tr>
+    <tr><td class="c">72&ndash;120</td><td>Transition from skeleton to expanded workforce as safety permits; issue revised work arrangements; keep Alternative Work Arrangements documentation for compliance/Civil Service Commission</td><td>Regional Manager; Human Resource focal</td><td>Workforce ramp-up plan</td></tr>
+    <tr><td class="c">72&ndash;120</td><td><b>After-action / lessons-learned debrief</b> with all coordinators + Quick Response Team; list PSCP gaps and recommended amendments [feeds Form 6 / plan update]</td><td>Regional Manager (Mindanao representative to the Continuity Core Team)</td><td>RO10 lessons-learned register</td></tr>
+    <tr><td class="c">~120</td><td>Prepare <b>recommendation to deactivate</b> (if criteria met): normal ops safely resumed / incident stabilized / hot site no longer required &mdash; submitted via Disaster Control Group to Head of Agency</td><td>Regional Office Disaster Control Group &rarr; Head Office Disaster Control Group &rarr; Head of Agency</td><td>Deactivation recommendation</td></tr>
+  </table>
+  <div class="milestones"><b>120-HOUR RECOMMENDATIONS (verify before 120 hours have elapsed):</b>
+    <ol style="margin:4px 0;">
+      <li>Disaster-driven <b>claims backlog under active management</b> with published provincial targets; indemnity payments flowing through confirmed channels.</li>
+      <li>Underwriting backlog triaged; no season-critical application left unprocessed without a documented reason.</li>
+      <li><b>RO10 disaster data brief</b> delivered to Head Office (extent of impact on insured farmers &mdash; a PSCP resource category).</li>
+      <li>Draft <b>post-incident reports</b> from Information and Communications Technology, Facilities, and Quick Response Team completed in parallel with operations.</li>
+      <li>Lessons-learned register created; PSCP amendment items identified for the next plan update.</li>
+      <li>Reconstitution (if applicable) scheduled; deactivation recommendation prepared if criteria are met.</li>
+      <li>Workforce ramp-up documented; welfare/hazard-pay entitlements reconciled.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ============ SECTION 4 ============ -->
+<h2>4. ESSENTIAL RESOURCES FOR RECOVERY &mdash; PRIORITIZATION MATRIX</h2>
+<p>Ranked using the PSCP impact areas (People, Place, Process, Partners, Public, Information and Communications Technology) and resource categories (Section X: Vital Records, People, Facilities &amp; Equipment, Process, Budget &amp; Funding, Partners, Information and Communications Technology, Disaster Data), then corrected by Recovery Time Objective logic: <b>what unblocks everything else comes first.</b></p>
+
+<table class="grid">
+  <thead><tr><th style="width:9%">Rank</th><th style="width:20%">Resource</th><th style="width:39%">What Must Be Secured / Restored</th><th style="width:19%">Responsible Role</th><th style="width:13%">Time Standard</th></tr></thead>
+  <tr>
+    <td class="c"><span class="badge b-p1">Priority 1</span></td>
+    <td><b>PEOPLE</b> (personnel safety, welfare, staffing)</td>
+    <td>100% accountability via call tree; casualties handled; dependents informed; skeleton crew identified; welfare (food, water, medical, transport) sustained</td>
+    <td>Quick Response Team Head (Regional Manager); Medical Coordinator (Claims Adjustment Division); Communications (Marketing and Sales Division)</td>
+    <td>Accountability: <b>within 1 hour</b><br>Welfare: continuous</td>
+  </tr>
+  <tr>
+    <td class="c"><span class="badge b-p1">Priority 1</span></td>
+    <td><b>Information and Communications Technology &amp; VITAL RECORDS</b> (data that proves coverage &amp; claims)</td>
+    <td>Backups verified off-site/cloud; <b>PCIC Automated Business System</b> (policy/claims database), <b>PCIC Financial Management System</b>, Human Resource Management System; servers, local area network and internet; physical vital records (policy registers, claims files, cash books); cybersecurity lockdown if applicable</td>
+    <td>Information and Communications Technology and Records Safety Coordinator (Information Technology Specialist)</td>
+    <td><b>Tier 2 Recovery Time Objective: 12&ndash;24 hours</b></td>
+  </tr>
+  <tr>
+    <td class="c"><span class="badge b-p2">Priority 2</span></td>
+    <td><b>COMMUNICATIONS</b> (command depends on it)</td>
+    <td>Call tree (mobile + group chat + satellite/radio fallback); daily Situation Report to Head Office; official social page active; spokesperson discipline; updated contact directory</td>
+    <td>Communications Coordinator (Marketing and Sales Division Chief)</td>
+    <td>Call tree: <b>within 1 hour</b><br>Situation Report: daily</td>
+  </tr>
+  <tr>
+    <td class="c"><span class="badge b-p3">Priority 3</span></td>
+    <td><b>FACILITIES &amp; HOT SITE</b> (safe place to work)</td>
+    <td>Structural safety check; hot site at nearest functional Extension Office: workspace, Information Technology lines, <b>generator/alternative power</b>, water, storage, office supplies</td>
+    <td>Facilities Safety Officer; Logistics Coordinator (Administrative and Finance Division)</td>
+    <td>Safety check: <b>within 4 hours</b><br>Hot site: pre-stage within 24 hours</td>
+  </tr>
+  <tr>
+    <td class="c"><span class="badge b-p4">Priority 4</span></td>
+    <td><b>LOGISTICS, TRANSPORT &amp; EQUIPMENT</b></td>
+    <td>Vehicles + fuel for field adjustment teams; office supplies; PPE; water/food; pre-arranged vendor contracts for Information Technology/generators</td>
+    <td>Logistics Coordinator (Administrative and Finance Division Chief)</td>
+    <td>Transport ready: <b>before claims fieldwork</b></td>
+  </tr>
+  <tr>
+    <td class="c"><span class="badge b-p5">Priority 5</span></td>
+    <td><b>BUDGET &amp; FUNDING</b> (contingency + payment capacity)</td>
+    <td>Contingency/emergency procurement funds; hazard pay, meals, transport reimbursements; <b>indemnity payment capacity</b> (disbursement modality, cash flow coordination with Finance/Head Office)</td>
+    <td>Administrative and Finance Division/Finance + Head Office approval chain</td>
+    <td>Confirmed by <b>within 72 hours</b></td>
+  </tr>
+  <tr>
+    <td class="c"><span class="badge b-p5">Priority 5</span></td>
+    <td><b>PARTNERS</b> (force multipliers)</td>
+    <td>Local Disaster Risk Reduction and Management Council and Office (access, alerts, evacuation status), PAGASA/PHIVOLCS, Philippine Red Cross, National Irrigation Administration/Department of Agriculture, landlord, telco, electric cooperative, other PCIC Regional Offices/extension offices</td>
+    <td>Quick Response Team Head (Regional Manager)</td>
+    <td>First contact: <b>within 8 hours</b></td>
+  </tr>
+  <tr>
+    <td class="c"><span class="badge b-p6">Priority 6</span></td>
+    <td><b>DISASTER DATA</b> (decision-grade information)</td>
+    <td>Extent of impact on insured farmers per province/municipality; expected claims volume; area damaged &mdash; drives national response and recovery targeting</td>
+    <td>Planning and Management Information Office/Planning focal + Claims Adjustment Division/Marketing and Sales Division</td>
+    <td>First brief: <b>within 120 hours</b>, then rolling</td>
+  </tr>
+</table>
+
+<div class="callout"><b>Recovery sequence rule for RO10:</b> <b>People &amp; data first (0&ndash;24 hours) &rarr; Information Technology/general services (12&ndash;24 hours Recovery Time Objective) &rarr; claims &amp; underwriting (48&ndash;72 hours Recovery Time Objective) &rarr; backlog scaling &amp; reconstitution (72&ndash;120 hours).</b> Never trade Priority 1 and Priority 2 items against lower ranks: without people and PCIC Automated Business System/policy data, there is no claims processing to resume.</div>
+
+<!-- ============ SECTION 5 ============ -->
+<h2>5. ROLE PLAYERS &amp; VITAL ROLE PRIORITIZATION</h2>
+
+<h3>5.1 RO10 Role Players (per PSCP Table 2 &mdash; Regional Office entries)</h3>
+<table class="grid">
+  <thead><tr><th style="width:22%">Disaster Control Group/Quick Response Team Role</th><th style="width:26%">RO10 Position</th><th style="width:14%">Primary</th><th style="width:14%">Alternate</th><th style="width:24%">Key Duties During Disaster</th></tr></thead>
+  <tr><td><b>Quick Response Team Head / Regional Office Incident Commander</b> [PROPOSED]</td><td>Regional Manager</td><td>&nbsp;</td><td>&mdash;</td><td>Activates Quick Response Team; assesses risk; directs safety measures; coordinates with National Irrigation Administration/Department of Agriculture/Local Disaster Risk Reduction and Management Council/Philippine Red Cross/landlord; Regional Office focal for Head Office</td></tr>
+  <tr><td><b>Logistics Coordinator</b></td><td>Chief, Administrative &amp; Finance Division (Administrative and Finance Division)</td><td>Div. Chief, Administrative and Finance Division</td><td>Administrative Services Officer</td><td><b>Hot site</b> establishment; transfer of records/equipment; power at hot site; food/water/supplies; heads finance/procurement support</td></tr>
+  <tr><td><b>Medical Coordinator</b></td><td>Chief, Claims Adjustment Division</td><td>Div. Chief, Claims Adjustment Division</td><td>Adjuster II</td><td>Personnel condition assessment; medical services; casualty records; supports welfare with Logistics</td></tr>
+  <tr><td><b>Communications Coordinator</b></td><td>Chief, Marketing &amp; Sales Division (Marketing and Sales Division)</td><td>Div. Chief, Marketing and Sales Division</td><td>Insurance Underwriter II</td><td><b>Call tree focal</b>; initial damage report; spokesperson (with Regional Manager/Head of Agency); press releases; <b>secretary of Disaster Control Group</b> &mdash; records all decisions/course of action</td></tr>
+  <tr><td><b>Information and Communications Technology and Records Safety Coordinator</b></td><td>Information Technology Specialist</td><td>Information Technology Specialist</td><td>Information Technology staff</td><td>Information Technology/records condition assessment; transfer/setup of Information Technology at hot site; posts info to web/social; <b>post-incident report on records/Information Technology</b></td></tr>
+  <tr><td><b>Facilities Safety Coordinator</b></td><td>Administrative Services Officer</td><td>Admin. Services Officer</td><td>Teller/Cashier</td><td>Facility safety assessment; evacuation/transfer of equipment &amp; records; post-incident report on facilities</td></tr>
+  <tr><td><b>Quick Response Team members</b></td><td>Three (3) Division Chiefs: <b>Administrative and Finance Division, Claims Adjustment Division, Marketing and Sales Division</b></td><td colspan="2" class="c">[PROPOSED: add Underwriting/Extension focal for Mission Essential Function coverage]</td><td>Unit-level assessment of personnel/records/equipment; unit evacuation; search/rescue if needed; retrieval of records; unit post-incident report</td></tr>
+  <tr><td colspan="5" style="background:#eef5fb;"><b>Other RO10 players:</b> all division/section chiefs &amp; extension office heads (Mission Essential Function manpower pool) &bull; Human Resource focal (staffing, Alternative Work Arrangements, welfare records) &bull; Finance/Accounting personnel (disbursement) &bull; Head Office Disaster Control Group &amp; Continuity Core Team (oversight; President = activation authority) &bull; external: Local Disaster Risk Reduction and Management Council, Office of Civil Defense Region X, PAGASA/PHIVOLCS, Philippine Red Cross, National Irrigation Administration, Department of Agriculture, landlord, telco, electric cooperative</td></tr>
+</table>
+
+<h3>5.2 Supporting Roles at Critical Moments</h3>
+<table class="grid">
+  <thead><tr><th style="width:30%">Situation</th><th style="width:35%">Who Steps Up</th><th style="width:35%">Per</th></tr></thead>
+  <tr><td>Activation/deactivation authority if President unreachable</td><td>Order: President &rarr; Vice President, Risk Management Office (Continuity Manager) &rarr; Vice President, Corporate Business Affairs Group (Continuity Coordinator)</td><td>PSCP Table 5, Order of Succession</td></tr>
+  <tr><td>PSCP actually activated</td><td>Continuity Core Team joins Disaster Control Group as Continuity Coordinators; Continuity Working Group units execute division-level continuity</td><td>PSCP Section VI.B</td></tr>
+  <tr><td>Facility unusable (Level 4)</td><td>Logistics + Information and Communications Technology lead hot-site migration; Facilities leads safe transfer; Communications notifies all</td><td>PSCP Section XI.C.4</td></tr>
+  <tr><td>Widespread field claims (post-disaster)</td><td>Claims Adjustment Division adjusters + underwriters redeployed as special adjustment teams</td><td>[PROPOSED] RO10 design</td></tr>
+</table>
+
+<h3>5.3 <span style="color:#c00000;">VITAL ROLES TO PRIORITIZE &mdash; "First Five Within Two Hours"</span></h3>
+<div class="callout">
+<p>If only five roles can be filled in the first two hours (personnel may be scattered, roads cut, power out), fill them in this order:</p>
+<ol style="margin:6px 0;">
+  <li><span class="rank">1</span> &nbsp;<b>Regional Manager / Quick Response Team Head</b> (command) &mdash; without a commander there is no coordinated response, no activation recommendation, no external coordination. <i>Alternate: Administrative and Finance Division Div. Chief or designated Regional Manager officer-in-charge.</i></li>
+  <li><span class="rank">2</span> &nbsp;<b>Communications Coordinator (Marketing and Sales Division Chief)</b> (information) &mdash; owns the call tree, the Disaster Control Group record of decisions, initial reports to Head Office, and public messaging; every other role is found through this role. <i>Alternate: Insurance Underwriter II.</i></li>
+  <li><span class="rank">3</span> &nbsp;<b>Information and Communications Technology and Records Safety Coordinator (Information Technology Specialist)</b> (data survival) &mdash; PCIC Automated Business System/policy &amp; claims data and backups face a 12&ndash;24 hours Recovery Time Objective; data lost in the first day cannot be reconstructed before farmers arrive with claims. <i>Alternate: Information Technology staff.</i></li>
+  <li><span class="rank">4</span> &nbsp;<b>Medical Coordinator (Claims Adjustment Division Chief)</b> (life safety) &mdash; casualty assessment, medical referral, and the personnel-welfare record; also the Claims Adjustment Division chief is the pipeline owner for the priority Mission Essential Function (claims). <i>Alternate: Adjuster II.</i></li>
+  <li><span class="rank">5</span> &nbsp;<b>Logistics Coordinator (Administrative and Finance Division Chief)</b> (restoration) &mdash; hot site, power, supplies, transport, and finance/procurement authority; the only role that can physically stand up an alternate workplace. <i>Alternate: Administrative Services Officer.</i></li>
+</ol>
+<p><b>Next in line:</b> Facilities Safety Officer (structure/safety gate) &rarr; the three Quick Response Team member division chiefs &rarr; Human Resource focal &rarr; remaining division chiefs (Mission Essential Function manpower).</p>
+<p class="kv"><b>Design principle [PROPOSED]:</b> rank roles by (1) command, (2) information flow, (3) irrecoverable data loss, (4) life safety, (5) restoration capacity &mdash; mirroring the resource priorities in Section 4. Every ranked role must have a <b>named, pre-identified alternate</b> in the contact directory before the next hazard season.</p>
+</div>
+
+<!-- ============ SECTION 6 ============ -->
+<h2>6. RECOMMENDATIONS &amp; INPUTS FOR TOMORROW'S PLANNING SESSION</h2>
+
+<h3>6.1 Bring-to-the-Table Deliverables (pre-filled drafts)</h3>
+<table class="grid">
+  <thead><tr><th style="width:22%">Guidebook Item / Form</th><th style="width:46%">RO10 Draft Input (prepared from this analysis)</th><th style="width:32%">Action Tomorrow</th></tr></thead>
+  <tr><td><b>Roles &amp; Responsibilities</b> (Chapter VI)</td><td>Section 5.1 roster: Disaster Control Group/Quick Response Team roles with primaries + alternates at Regional Office level</td><td>Validate names, ensure every alternate is confirmed and reachable; test call tree same day</td></tr>
+  <tr><td><b>Form 1: Continuity Policy Statement</b> (Chapter IV)</td><td>Adopt Head Office policy statement with RO10 commitment line: continuity of underwriting &amp; claims services for Region 10 farmers during any disruption</td><td>Submit as Regional Office endorsement; confirm signatory (Regional Manager)</td></tr>
+  <tr><td><b>Form 2: Risk Assessment</b> (Chapter VII/VIII)</td><td>Section 1.3 hazard table (local exposure notes + proposed emphasis: typhoon &amp; earthquake at score 20; locally elevated flood/landslide; prolonged power/internet as Information and Communications Technology-killer)</td><td>Score with facilitator using the Guidebook format (five impact areas and Information and Communications Technology per hazard)</td></tr>
+  <tr><td><b>Assumptions</b> (Chapter VII)</td><td>Draft: 50% of staff may be unreachable first 8 hours; power/internet may be down 24&ndash;72 hours; Local Disaster Risk Reduction and Management Council may suspend work in hit provinces; roads (Pantaron/coastal) may be cut; extension offices may serve as hot sites</td><td>Present and amend during assumptions workshop</td></tr>
+  <tr><td><b>Mission Essential Functions &amp; Recovery Time Objectives</b> (Chapter VIII, Forms 3&ndash;4)</td><td>Both Mission Essential Functions Tier 4 (48&ndash;72 hours); both Essential Supporting Activities Tier 2 (12&ndash;24 hours); <b>proposed sequence: claims (Mission Essential Function 2) prioritized over underwriting (Mission Essential Function 1)</b> after a disaster</td><td>Validate sequence with Head Office; confirm responsible units for RO10 (Table 3 entries)</td></tr>
+  <tr><td><b>Activation Matrix</b> (Chapter IX)</td><td>Section 2.2 localized triggers (for example, single-province work suspension = Level 2; Mission Essential Function &lt;50% = Level 3)</td><td>Confirm whether Regional Manager may declare Level 1&ndash;2 measures pending Head of Agency</td></tr>
+  <tr><td><b>Hot Site Designation</b> (Chapter XI)</td><td><b>Pre-designate the nearest functional Extension Office</b> as RO10 hot site (manual: for Regional Offices, nearest PCIC Extension Office) + list 1 alternate</td><td>Decide primary + alternate; task Administrative and Finance Division/Information and Communications Technology to inventory and pre-stage within the quarter</td></tr>
+  <tr><td><b>Call Tree / Contact Directory</b> (Chapter XII)</td><td>Template: all divisions, extension offices, Head Office focal points, external partners (Local Disaster Risk Reduction and Management Council, Philippine Red Cross, National Irrigation Administration, telco, electric coop, landlord)</td><td>Populate with live numbers; schedule a test cascade</td></tr>
+</table>
+
+<h3>6.2 Seven Recommendations for the RO10 Planning Team</h3>
+<ol>
+  <li><b>Designate and pre-stage the hot site now.</b> The single biggest Level-4 dependency is an untested alternate site. Choose the extension office, verify its internet/power, and pre-position a generator, Information Technology kit, and records chest <i>before</i> the next typhoon season.</li>
+  <li><b>Treat data as mission-critical, not Information Technology-routine.</b> Adopt daily off-site/cloud backup of PCIC Automated Business System and PCIC Financial Management System with a monthly restore test. The 12&ndash;24 hours Information and Communications Technology Recovery Time Objective is meaningless without a verified restore path.</li>
+  <li><b>Pre-write the first 24 hours as checklists, not prose.</b> One-page cards per coordinator (roll call script, Initial Damage Assessment form, Situation Report template, advisory template) &mdash; memory fails in the first hours.</li>
+  <li><b>Adopt claims-first triage for disasters.</b> Document a standing rule: after any regional calamity, Mission Essential Function 2 (claims) gets first call on restored capacity, with fast-track handling for farmers in areas under a local state-of-calamity declaration.</li>
+  <li><b>Cross-train for single-point-of-failure roles.</b> Information Technology Specialist, Marketing and Sales Division Chief, and Administrative and Finance Division Chief roles each need at least two trained personnel; aligns with PSCP staffing-continuity strategy (backup personnel + cross-training).</li>
+  <li><b>Bind the call tree to an Alternative Work Arrangements decision tree.</b> When staff are notified, they must simultaneously learn their mode (report / Work From Home / standby / hot site). Separate memos cause confusion.</li>
+  <li><b>Start the post-incident report at 72 hours, not after deactivation.</b> Assign Information and Communications Technology, Facilities, and Quick Response Team members to draft in parallel; the RO10 lessons-learned register becomes the input to the next PSCP revision.</li>
+</ol>
+
+<h3>6.3 Questions for the Office of Civil Defense Resource Person</h3>
+<ol>
+  <li>Can a Regional Manager declare <b>Level 1&ndash;2</b> (heightened/partial) measures on his own, or is every activation-level call reserved for the Head of Agency?</li>
+  <li>How does a <b>Regional/Division-level PSCP</b> (per Continuity Working Group mandate) formally relate to the national PCIC-PSCP-001 &mdash; is it an annex, a standalone, or a localized implementation guide?</li>
+  <li>What is the recommended <b>funding source</b> for regional emergency procurement during an activated PSCP (contingency fund, quick-response fund, advancing)?</li>
+  <li>Should <b>Recovery Time Objectives be re-derived at Regional Office level</b>, or does RO10 adopt Head Office Table 3 tiers verbatim?</li>
+  <li>What evidence does the Guidebook expect for <b>testing/exercise</b> (Form 6): tabletop, call-tree test, or full hot-site drill &mdash; and what frequency?</li>
+  <li>For <b>widespread catastrophe claims</b>, does Head Office have an existing surge-workforce mechanism (for example, detailing adjusters from other Regional Offices) that RO10 can pre-agree on?</li>
+</ol>
+
+<h3>6.4 Known Gaps to Raise (honest baseline)</h3>
+<table class="grid">
+  <thead><tr><th style="width:50%">Gap</th><th style="width:26%">Impact if Unaddressed</th><th style="width:24%">Proposed Owner</th></tr></thead>
+  <tr><td>No verified/tested hot site (Information Technology, power, and water unconfirmed)</td><td>Level 4 failure; total service outage</td><td>Administrative and Finance Division + Information and Communications Technology</td></tr>
+  <tr><td>Contact directory may be stale; call tree untested</td><td>Hour-1 confusion; delayed accountability</td><td>Marketing and Sales Division (Communications)</td></tr>
+  <tr><td>Backups: existence/frequency/off-site status unverified</td><td>Irrecoverable policy/claims data loss</td><td>Information Technology Specialist</td></tr>
+  <tr><td>No documented disaster claims-triage rule</td><td>Backlog chaos; farmer complaints; reputational damage</td><td>Claims Adjustment Division + Regional Manager</td></tr>
+  <tr><td>Single-person critical roles (Information Technology staff and coordinators) without tested alternates</td><td>Role blackout when key staff are stranded</td><td>Regional Manager + Human Resource focal</td></tr>
+  <tr><td>Emergency procurement/contingency fund path unclear</td><td>Cannot buy fuel/generators/supplies when needed</td><td>Administrative and Finance Division + Finance</td></tr>
+</table>
+
+<div class="note"><b>Bottom line for tomorrow:</b> Walk in with (1) the validated role roster with alternates, (2) the localized risk table, (3) a proposed hot site + alternate, (4) the claims-first Recovery Time Objective sequence, and (5) the six questions above. These five inputs move RO10 from "a plan we have" to "a capability we can execute."</div>
+
+<h2 id="annex-a">ANNEX A &mdash; PARTICIPANT QUESTIONNAIRE ANSWERS (INTEGRATED PLANNING INPUTS)</h2>
+
+<div class="note">
+  <b>Status:</b> This annex integrates the answers to the RO10 Participant Questionnaire, grounded in the PCIC Public Service Continuity Plan, 2nd Edition (PSCP) and this Course of Action (COA). Items marked <b>[TO BE CONFIRMED]</b> are RO10-specific facts &mdash; names, contacts, hot-site and resource status &mdash; to be completed by the Regional Office before the planning session.
+</div>
+
+<h3>A.1 Activation &amp; Decision-Making (Questionnaire Part II)</h3>
+<table class="grid">
+  <thead><tr><th style="width:26%">Question</th><th style="width:52%">Answer</th><th>Basis</th></tr></thead>
+  <tr><td>2.1 Convening and initial report</td><td>The Disaster Control Group/Quick Response Team convenes <b>immediately, target within 1 hour</b>; the initial damage report reaches the Head Office <b>within 4 hours</b>.</td><td>PSCP Section IX.C (activation procedure); COA Phase 1 (roll call 0&ndash;1 hour; Report #1 within 4 hours)</td></tr>
+  <tr><td>2.2 Activation triggers</td><td>ICT/utility outage <b>beyond 12 hours = Level 1</b>; Mission Essential Function at <b>60&ndash;80% capacity = Level 2</b>; <b>unsafe facility = Level 4</b>.</td><td>PSCP Activation Matrix (Table 5)</td></tr>
+  <tr><td>2.3 Regional Manager authority</td><td>The Regional Manager may declare <b>Level 1&ndash;2 measures</b> (call tree, skeleton staffing, backup verification) immediately and report to the Head of Agency. These are preparatory measures; <b>PSCP activation authority remains with the Head of Agency</b>.</td><td>PSCP Section IX.A; COA Decision 4</td></tr>
+  <tr><td>2.4 Decision that must never wait</td><td><b>Activate the call tree and complete the personnel roll call</b>, and <b>secure vital records and backups</b>. Reporting and approval follow; these actions cannot wait because life safety and the 12&ndash;24-hour Tier 2 clock are already running.</td><td>COA Phase 1; PSCP Recovery Time Objective tiers</td></tr>
+</table>
+
+<h3>A.2 Recovery Time Objectives &amp; Recovery Sequence (Questionnaire Part IV)</h3>
+<table class="grid">
+  <thead><tr><th style="width:38%">Function</th><th style="width:12%">Tier</th><th style="width:18%">Recovery Time Objective</th><th>Position</th></tr></thead>
+  <tr><td>Information Technology Services</td><td>Tier 2</td><td>12&ndash;24 hours</td><td><b>Accept</b> &mdash; prerequisite for both Mission Essential Functions</td></tr>
+  <tr><td>General Services</td><td>Tier 2</td><td>12&ndash;24 hours</td><td><b>Accept</b></td></tr>
+  <tr><td>Mission Essential Function 2 &mdash; Processing of Claims for Indemnity</td><td>Tier 4</td><td>48&ndash;72 hours</td><td><b>Accept</b> &mdash; first service restored after Information Technology/Essential Supporting Activities</td></tr>
+  <tr><td>Mission Essential Function 1 &mdash; Processing of Insurance Applications</td><td>Tier 4</td><td>48&ndash;72 hours</td><td><b>Accept</b> &mdash; follows claims</td></tr>
+</table>
+<p class="kv"><b>Recovery order:</b> (1) Information Technology/Essential Supporting Activities first &rarr; (2) Claims (Mission Essential Function 2) &rarr; (3) Underwriting (Mission Essential Function 1). Basis: PSCP Recovery Time Objective tiers; COA Priority 1&ndash;2 and Decision 3 (claims-first triage).</p>
+
+<h3>A.3 Regional Hazards &amp; Vulnerability (Questionnaire Part V)</h3>
+<table class="grid">
+  <thead><tr><th style="width:34%">Hazard (top 3, proposed)</th><th style="width:14%">Impact (1&ndash;5)</th><th>Rationale</th></tr></thead>
+  <tr><td>Typhoon</td><td class="c">5</td><td>Region 10&rsquo;s dominant recurring hazard; drives power, network and transport disruption.</td></tr>
+  <tr><td>Flood / Landslide</td><td class="c">4</td><td>Riverine and upland exposure across Bukidnon, Misamis Oriental and Lanao del Norte; can isolate extension offices.</td></tr>
+  <tr><td>Earthquake</td><td class="c">4</td><td>Seismic exposure from nearby active sources; facility safety and records at risk.</td></tr>
+</table>
+<p class="kv"><b>Most vulnerable impact area (5.1):</b> <b>Information and Communications Technology</b> &mdash; PCIC Automated Business System/PCIC Financial Management System availability is the single point of failure; an unverified hot site and unconfirmed backups cascade directly into both Mission Essential Functions. <i>Ratings are proposed and subject to validation at the planning session.</i></p>
+
+<h3>A.4 Roles &amp; Responsibilities &mdash; Names to Confirm (Questionnaire Part III)</h3>
+<table class="grid">
+  <thead><tr><th style="width:30%">Disaster Control Group/Quick Response Team Role</th><th style="width:23%">Primary</th><th style="width:23%">Alternate</th><th>Contact / Remarks</th></tr></thead>
+  <tr><td>Quick Response Team Head / Regional Office Incident Commander (Regional Manager)</td><td>[TO BE CONFIRMED]</td><td>[TO BE CONFIRMED]</td><td>[TO BE CONFIRMED]</td></tr>
+  <tr><td>Logistics Coordinator (Chief, Administrative and Finance Division)</td><td>[TO BE CONFIRMED]</td><td>[TO BE CONFIRMED]</td><td>[TO BE CONFIRMED]</td></tr>
+  <tr><td>Medical Coordinator (Chief, Claims Adjustment Division)</td><td>[TO BE CONFIRMED]</td><td>[TO BE CONFIRMED]</td><td>[TO BE CONFIRMED]</td></tr>
+  <tr><td>Communications Coordinator (Chief, Marketing and Sales Division)</td><td>[TO BE CONFIRMED]</td><td>[TO BE CONFIRMED]</td><td>[TO BE CONFIRMED]</td></tr>
+  <tr><td>Information and Communications Technology &amp; Records Safety Coordinator (Information Technology Specialist)</td><td>[TO BE CONFIRMED]</td><td>[TO BE CONFIRMED]</td><td>[TO BE CONFIRMED]</td></tr>
+  <tr><td>Facilities Safety Coordinator (Administrative Services Officer)</td><td>[TO BE CONFIRMED]</td><td>[TO BE CONFIRMED]</td><td>[TO BE CONFIRMED]</td></tr>
+  <tr><td>Quick Response Team Member 1 (Administrative and Finance Division Chief)</td><td>[TO BE CONFIRMED]</td><td>[TO BE CONFIRMED]</td><td>[TO BE CONFIRMED]</td></tr>
+  <tr><td>Quick Response Team Member 2 (Claims Adjustment Division Chief)</td><td>[TO BE CONFIRMED]</td><td>[TO BE CONFIRMED]</td><td>[TO BE CONFIRMED]</td></tr>
+  <tr><td>Quick Response Team Member 3 (Marketing and Sales Division Chief)</td><td>[TO BE CONFIRMED]</td><td>[TO BE CONFIRMED]</td><td>[TO BE CONFIRMED]</td></tr>
+  <tr><td>Division PSCP focal (division-level continuity)</td><td>[TO BE CONFIRMED]</td><td>[TO BE CONFIRMED]</td><td>[TO BE CONFIRMED]</td></tr>
+</table>
+<p class="kv">Basis: PSCP Table 2 (Regional Office representatives and alternates). Names and contacts are to be supplied by RO10.</p>
+
+<h3>A.5 Hot Site &amp; Resource Status (Questionnaire Part VI)</h3>
+<table class="grid">
+  <thead><tr><th style="width:46%">Item</th><th>Status / Answer</th></tr></thead>
+  <tr><td>6.1 Primary hot site (nearest functional Extension Office)</td><td>[TO BE CONFIRMED]</td></tr>
+  <tr><td>6.2 Alternate hot site</td><td>[TO BE CONFIRMED]</td></tr>
+  <tr><td>6.3 Hot site readiness</td><td>[TO BE CONFIRMED]</td></tr>
+  <tr><td>6.4 Backups of PCIC Automated Business System/PCIC Financial Management System</td><td>[TO BE CONFIRMED]</td></tr>
+  <tr><td>6.5 Generator / alternative power at primary office</td><td>[TO BE CONFIRMED]</td></tr>
+  <tr><td>6.6 Emergency transport for field claims teams</td><td>[TO BE CONFIRMED]</td></tr>
+  <tr><td>6.7 Contingency / emergency procurement fund at Regional Office level</td><td>[TO BE CONFIRMED]</td></tr>
+  <tr><td>6.8 Indemnity disbursement modality during disruption</td><td>[TO BE CONFIRMED]</td></tr>
+  <tr><td>6.9 Top-3 resource needs (ranked)</td><td>[TO BE CONFIRMED]</td></tr>
+  <tr><td>6.10 Resource the unit can share/loan</td><td>[TO BE CONFIRMED]</td></tr>
+</table>
+<p class="kv"><b>Hot-site requirement checklist (PSCP):</b> Information Technology equipment, internet and telecommunication lines; workspace for a skeletal workforce; office supplies and equipment; access to backup data; generators or alternative power; potable water; storage. <b>Location rule:</b> nearest functional PCIC Extension Office.</p>
+
+<h3>A.6 Communication Procedures (Questionnaire Part VII)</h3>
+<table class="grid">
+  <thead><tr><th style="width:40%">Item</th><th>Answer</th></tr></thead>
+  <tr><td>7.1 Primary channel for the call tree</td><td>Viber/Messenger group (official closed group), backed by calls and SMS.</td></tr>
+  <tr><td>7.2 Fallback if networks are down</td><td>SMS and voice calls; designated assembly point and runners; Local Disaster Risk Reduction and Management Council/Office of Civil Defense radio where available.</td></tr>
+  <tr><td>7.3 Call-tree cascade time</td><td>Target: 1 hour for 100% personnel roll call; 2 hours to reach all extension offices. Last test: [TO BE CONFIRMED].</td></tr>
+  <tr><td>7.4 Situation report frequency to Head Office</td><td>Every 6 hours during activation; daily once operations stabilize.</td></tr>
+  <tr><td>7.5 Official spokesperson</td><td>Communications Coordinator (Marketing and Sales Division Chief) &mdash; [TO BE CONFIRMED].</td></tr>
+  <tr><td>7.6 Client/public information channels</td><td>[TO BE CONFIRMED] (official page, radio, client group chats).</td></tr>
+  <tr><td>7.7 Weakest link</td><td>No tested network-down fallback; the contact directory and call tree have not yet been validated RO-wide.</td></tr>
+</table>
+<p class="kv">Basis: PSCP Section XII.D (Call Tree) and Communications Coordinator role; COA Phase 1 advisory and spokesperson discipline.</p>
+
+<h3>A.7 Readiness &amp; Training (Questionnaire Part IX)</h3>
+<table class="grid">
+  <thead><tr><th style="width:44%">Dimension / Item</th><th>Position</th></tr></thead>
+  <tr><td>Restoration ranking (9.1)</td><td>1 People (safety, welfare) &rarr; 2 Information and Communications Technology &amp; vital records &rarr; 3 Communications</td></tr>
+  <tr><td>Readiness ratings (9.2)</td><td>Roles with alternates 2; call tree tested 2; hot site 1; backups 2; alternative work arrangements 2; PSCP knowledge 3</td></tr>
+  <tr><td>Priority training in the next 6 months (9.3)</td><td>Live call-tree test; hot-site tabletop/drill; backup restore test</td></tr>
+</table>
+<p class="kv">Ratings are proposed from the COA findings (single-point roles, unverified hot site and backups) and should be adjusted in plenary.</p>
+
+<h3>A.8 Prepared Statements (Questionnaire Part VIII)</h3>
+<table class="grid">
+  <thead><tr><th style="width:36%">Question</th><th>Drafted answer</th></tr></thead>
+  <tr><td>8.1 Biggest obstacle to implementation</td><td>Single-point critical roles without tested alternates, combined with an unverified hot site and unconfirmed off-site backups &mdash; the plan exists, but the capability is untested.</td></tr>
+  <tr><td>8.2 Unit contribution to continuity</td><td>Keep essential division tasks running with a skeletal workforce, account for all personnel, and safeguard records and data.</td></tr>
+  <tr><td>8.3 Recommended PSCP change</td><td>Designate and pre-stage the hot site, mandate daily off-site/cloud backups with monthly restore tests, and adopt the claims-first triage rule.</td></tr>
+  <tr><td>8.4 Head Office support needed</td><td>Funding and authority for cloud/off-site backup, generator and hot-site kit; clear emergency procurement guidance.</td></tr>
+  <tr><td>8.5 First action if a typhoon hits at 5:00 PM</td><td>At 5:15 PM, activate the call tree for a 100% roll call and issue the first staff/client advisory; secure vital records and backups.</td></tr>
+  <tr><td>8.6 Scenario that would overwhelm the plan</td><td>A strong typhoon with more than 48 hours of power and network outage, an unsafe regional office, and widespread staff displacement.</td></tr>
+</table>
+
+<div class="note"><b>Use of this annex:</b> These answers support the planning session and the Response Summary Matrix; they do not replace management decisions. Complete all [TO BE CONFIRMED] fields before circulation.</div>
+
+<footer class="docfoot">
+  PCIC Regional Office X &mdash; Disaster Course of Action Design (Working Paper) &bull; Prepared 18 October 2026 &bull; Based on PCIC Public Service Continuity Plan, 2nd Ed. (PCIC-PSCP-001, Eff. 12/16/2025) &bull; For planning-session validation &bull; INTERNAL USE
+</footer>
+
+</div>
+</body>
+</html>
